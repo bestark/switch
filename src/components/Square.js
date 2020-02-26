@@ -14,7 +14,7 @@ class Square extends React.Component {
     render() {
         return (
             <button className="square" data-index={this.props.index} onClick={this.handleClick}>
-                {this.props.index}
+                {this.props.value}
             </button>
         )
     }
