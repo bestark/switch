@@ -1,0 +1,15 @@
+.square {
+  background: $color-square;
+  border: 1px solid $color-border;
+  flex: 1;
+  height: $size-board / 5;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.is-active {
+    background-color: $color-square-active;
+  }
+}

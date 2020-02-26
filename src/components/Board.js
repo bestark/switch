@@ -6,6 +6,16 @@ export default class Board extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            board: this.getRandomBoard(),
+            moves: 0
+        };
+
+        this.handleClick = this.handleClick.bind(this);
+        this.startNewGame = this.startNewGame.bind(this);
+    }
+
+    getRandomBoard() {
         const pattern = [
             [6, 7, 8, 11, 13, 16, 17, 18],
             [0, 4, 6, 8, 12, 16, 18, 20, 24],
@@ -14,14 +24,14 @@ export default class Board extends React.Component {
         const randomNumber = Math.floor(Math.random() * 3);
 
         let initBoard = Array(25).fill(false);
-        let board = initBoard.map((item, index) => pattern[randomNumber].includes(index));
+        return initBoard.map((item, index) => pattern[randomNumber].includes(index));
+    }
 
-        this.state = {
-            board,
+    startNewGame() {
+        this.setState(() => ({
+            board: this.getRandomBoard(),
             moves: 0
-        };
-
-        this.handleClick = this.handleClick.bind(this);
+        }))
     }
 
     handleClick(e) {
@@ -41,7 +51,7 @@ export default class Board extends React.Component {
         }));
     }
 
-    getNearbyField (clickedElementIndex) {
+    getNearbyField(clickedElementIndex) {
         const topEl = canBeSet(clickedElementIndex - 5, 'top');
         const bottomEl = canBeSet(clickedElementIndex + 5, 'bottom');
         const leftEl = canBeSet(clickedElementIndex - 1, 'left');
@@ -58,7 +68,8 @@ export default class Board extends React.Component {
         for (let i = 0; i < size; i++) {
             let column = [];
             for (let j = 0; j < size; j++) {
-                column.push(<Square key={index} enabled={this.playerFoundSolution(this.state.board)} index={index} value={this.state.board[index]}
+                column.push(<Square key={index} enabled={this.playerFoundSolution()} index={index}
+                                    value={this.state.board[index]}
                                     onClick={this.handleClick}/>);
                 index++;
             }
@@ -70,11 +81,11 @@ export default class Board extends React.Component {
         return board;
     }
 
-    playerFoundSolution (board) {
+    playerFoundSolution() {
         let resolved = true;
 
-        board.forEach((item) => {
-            if(item === false) {
+        this.state.board.forEach((item) => {
+            if (item === false) {
                 resolved = false;
             }
         })
@@ -85,10 +96,15 @@ export default class Board extends React.Component {
     render() {
 
         return (
-            <div className={"board"}>
-                <p>Moves: {this.state.moves}</p>
+            <div className={this.playerFoundSolution() ? "board is-won" : "board"}>
                 {this.createBoard(5)}
+                <div className={"board__info margin-center"}>
+                    <p>Moves: {this.state.moves}</p>
+                    <button className={"reset"} onClick={this.startNewGame}>Start new game</button>
+                </div>
             </div>
+
+
         )
     }
 }

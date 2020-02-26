@@ -1,0 +1,22 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  width: $size-board;
+  margin: 0 auto;
+
+  &.is-won {
+    button.square {
+      background-color: $color-square-won;
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  &__info {
+   text-align: center;
+  }
+}

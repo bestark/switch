@@ -3,6 +3,10 @@
 @import "base/variables";
 @import "base/base";
 
+// Utils
+@import "utils/utils";
+
 // Components
+@import "components/header";
 @import 'components/board';
 @import 'components/square';
