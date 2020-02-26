@@ -15,4 +15,8 @@
   &:focus {
     outline: none;
   }
+
+  &.is-active {
+    background-color: #9bc400;
+  }
 }

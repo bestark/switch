@@ -1,46 +1,28 @@
 import React from 'react'
 import Square from "./Square";
+import {canBeSet} from "./utils";
 
 export default class Board extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+
+        const pattern = [
+            [6, 7, 8, 11, 13, 16, 17, 18],
+            [0, 4, 6, 8, 12, 16, 18, 20, 24],
+            [2, 6, 8, 10, 12, 14, 16, 18, 22]
+        ];
+        const randomNumber = Math.floor(Math.random() * 3);
+
+        let initBoard = Array(25).fill(false);
+        let board = initBoard.map((item, index) => pattern[randomNumber].includes(index));
 
         this.state = {
-            board: Array(25).fill(null)
-        }
+            board
+        };
 
         this.handleClick = this.handleClick.bind(this);
-        this.canBeSet = this.canBeSet.bind(this);
     }
 
-    canBeSet(fieldNumber, pos) {
-        if (pos === 'top') {
-            if (fieldNumber >= 0) {
-                return fieldNumber;
-            }
-        }
-
-        if (pos === 'bottom') {
-            if (fieldNumber < 25) {
-                return fieldNumber;
-            }
-        }
-
-        if (pos === 'right') {
-            if (fieldNumber === 5 || fieldNumber === 10 || fieldNumber === 15 || fieldNumber === 20 || fieldNumber === 25) {
-                return undefined;
-            } else {
-                return fieldNumber
-            }
-        }
-        if (pos === 'left') {
-            if (fieldNumber === 4 || fieldNumber === 9 || fieldNumber === 14 || fieldNumber === 19 || fieldNumber === 24) {
-                return undefined;
-            } else {
-                return fieldNumber
-            }
-        }
-    }
 
     handleClick(e) {
         // get All squares
@@ -48,16 +30,16 @@ export default class Board extends React.Component {
 
         const elIndex = parseInt(e.target.getAttribute('data-index'));
 
-        const topEl = this.canBeSet(elIndex - 5, 'top');
-        const bottomEl = this.canBeSet(elIndex + 5, 'bottom');
-        const leftEl = this.canBeSet(elIndex - 1, 'left');
-        const rightEl = this.canBeSet(elIndex + 1, 'right');
+        const topEl = canBeSet(elIndex - 5, 'top');
+        const bottomEl = canBeSet(elIndex + 5, 'bottom');
+        const leftEl = canBeSet(elIndex - 1, 'left');
+        const rightEl = canBeSet(elIndex + 1, 'right');
 
         const allEl = [elIndex, topEl, rightEl, bottomEl, leftEl];
 
         allEl.forEach((element) => {
             if (element || element === 0) {
-                squares[element] = 'X';
+                squares[element] = !squares[element];
             }
         })
 
