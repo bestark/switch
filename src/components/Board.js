@@ -99,12 +99,10 @@ export default class Board extends React.Component {
             <div className={this.playerFoundSolution() ? "board is-won" : "board"}>
                 {this.createBoard(5)}
                 <div className={"board__info margin-center"}>
-                    <p>Moves: {this.state.moves}</p>
+                    <p>{this.playerFoundSolution() ? <div>You Won! Needed clicks: {this.state.moves}</div> : <div>Moves: {this.state.moves}</div>}</p>
                     <button className={"reset"} onClick={this.startNewGame}>Start new game</button>
                 </div>
             </div>
-
-
         )
     }
 }
