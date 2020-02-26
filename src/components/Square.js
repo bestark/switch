@@ -13,7 +13,7 @@ class Square extends React.Component {
 
     render() {
         return (
-            <button type={"button"} className={this.props.value ? 'square is-active' : 'square'} data-index={this.props.index} onClick={this.handleClick}></button>
+            <button disabled={this.props.enabled} type={"button"} className={this.props.value ? 'square is-active' : 'square'} data-index={this.props.index} onClick={this.handleClick}></button>
         )
     }
 }
