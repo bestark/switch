@@ -4,12 +4,16 @@
   flex: 1;
   height: $size-board / 5;
   padding: 0;
+  transition: all 0.2s ease-in-out;
+  margin-top: -1px;
+  margin-right: -1px;
 
   &:focus {
     outline: none;
   }
 
   &.is-active {
+    border-color: $color-light;
     background-color: $color-square-active;
   }
 }

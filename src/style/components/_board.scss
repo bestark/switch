@@ -1,8 +1,9 @@
 .board {
   display: flex;
   flex-direction: column;
-  width: $size-board;
   margin: 0 auto;
+  padding: 1rem;
+  width: $size-board;
 
   &.is-won {
     button.square {
@@ -17,6 +18,8 @@
   }
 
   &__info {
-   text-align: center;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 300;
   }
 }

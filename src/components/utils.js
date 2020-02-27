@@ -1,13 +1,18 @@
 export function canBeSet(fieldNumber, pos) {
     if (pos === 'top') {
-        if (fieldNumber >= 0) {
+        if (fieldNumber >= 0 && fieldNumber <= 24) {
             return fieldNumber;
+        } else {
+            return undefined
         }
+
     }
 
     if (pos === 'bottom') {
         if (fieldNumber < 25) {
             return fieldNumber;
+        } else {
+            return undefined
         }
     }
 
@@ -19,7 +24,7 @@ export function canBeSet(fieldNumber, pos) {
         }
     }
     if (pos === 'left') {
-        if (fieldNumber === 4 || fieldNumber === 9 || fieldNumber === 14 || fieldNumber === 19 || fieldNumber === 24) {
+        if (fieldNumber === -1 || fieldNumber === 4 || fieldNumber === 9 || fieldNumber === 14 || fieldNumber === 19 || fieldNumber === 24) {
             return undefined;
         } else {
             return fieldNumber
